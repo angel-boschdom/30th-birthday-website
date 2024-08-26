@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>Angel 30th Birthday Trip - Hurghada</title>
+    <style>
+        body {
+            background-color: #fb9c58;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: center;
+            margin: 0;
+            font-family: 'Bungee', sans-serif;
+            color: rgba(139, 29, 25, 0.9);
+            text-align: center;
+            position: relative;
+            padding: 20px;
+        }
+
+        img {
+            width: 250px;
+            height: auto;
+            border-radius: 5%;
+            margin-bottom: 20px;
+            border: 2px solid #333;
+        }
+
+        /* Menu styles */
+        .menu {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-size: 30px;
+            cursor: pointer;
+            z-index: 10;
+        }
+
+        .menu-icon {
+            width: 50px;
+            height: 50px;
+            background-color: #8B0000;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 30px;
+            cursor: pointer;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            right: 0;
+            top: 60px;
+            background-color: #f9f9f9;
+            min-width: 300px;
+            box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+            z-index: 1;
+        }
+
+        .dropdown-content a {
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+        }
+
+        .dropdown-content a:hover {
+            background-color: #f1f1f1;
+        }
+
+        /* Table styles */
+        table {
+            border-collapse: collapse;
+            margin: 20px 0;
+            font-size: 18px;
+            width: 100%;
+            max-width: 800px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            overflow-x: auto;
+            display: block;
+        }
+
+        th, td {
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            text-align: center;
+        }
+
+        th {
+            background-color: #8B0000;
+            color: white;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        tr:nth-child(odd) {
+            background-color: #f2f2f2ac;
+        }
+
+        tr:hover {
+            background-color: #ddd;
+        }
+
+        /* Styles for the responsive iframe */
+        .video-container {
+            width: 90%;
+            max-width: 1000px;
+            margin: 20px auto;
+            position: relative;
+            padding-bottom: 56.25%; /* 16:9 aspect ratio */
+            height: 0;
+            overflow: hidden;
+            max-height: 700px; /* Limit the maximum height */
+        }
+
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            max-height: 700px; /* Ensure iframe doesn't exceed this height */
+        }
+
+
+    </style>
+</head>
+<body>
+
+<h1>Hurghada</h1>
+<p>Get ready to dive into an unforgettable adventure in Hurghada! From the crystal-clear waters of the Red Sea to the vibrant nightlife, this coastal paradise is a must in Egypt!</p>
+
+<!-- Embedded YouTube video with responsive container -->
+<div class="video-container">
+    <iframe src="https://www.youtube.com/embed/GoXMo61EK-8" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</div>
+
+<h2>Why Hurghada?</h2>
+<img src="./assets/hurghada/beach.png" alt="Beach in Hurghada">
+<p>Imagine exploring colorful coral reefs, swimming alongside exotic marine life, and then dancing the night away at some of the hottest clubs in town. And if you're craving a taste of tradition, we've got you covered with an authentic Bedouin experience under the starlit desert sky. Hurghada is the perfect mix of thrill and chill!</p>
+<h2>Diving in the Red Sea</h2>
+<img src="./assets/hurghada/scuba.png" alt="Coral reef in Hurghada">
+<h2>Eastern Desert Safari</h2>
+<img src="./assets/hurghada/desertsafari.png" alt="Desert Safari on Quads">
+
+<h2>What's On the Agenda?</h2>
+<table>
+    <thead>
+        <tr>
+            <th>Activity</th>
+            <th>Description</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><a href=https://dive-hurghada.com>Scuba diving</a></td>
+            <td>Dive into the depths of the Red Sea to discover a mesmerizing underwater world filled with vibrant corals and fascinating marine creatures.</td>
+        </tr>
+        <tr>
+            <td><a href=https://dailytravelpill.com/hurghada-snorkeling-best-places>Snorkeling</a></td>
+            <td>Not a diver? No worries! Snorkeling is just as exciting, giving you a close-up view of the stunning reefs and playful fish.</td>
+        </tr>
+        <tr>
+            <td>Clubbing & <a href=https://hurghada.com/night-life>Nightlife</a></td>
+            <td>When the sun goes down, Hurghada comes alive! Get ready to party at the best clubs.</td>
+        </tr>
+        <tr>
+            <td><a href=https://www.tripadvisor.com/AttractionProductReview-g297549-d16912582-Super_Safari_ATV_Drive_Buggy_Car_Camel_Ride_Bedouin_Dinner_Show_Hurghada-Hurghada_.html>Desert Safari</a> & Bedouin Experience</td>
+            <td>Escape the city lights and venture into the wild Eastern Desert with 4x4 Quads & Jeeps, and enjoy a magical evening with the Bedouins, under the stars.</td>
+        </tr>
+    </tbody>
+</table>
+
+<p>Can't wait to experience all this? Neither can I! Hurghada is calling, and it's going to be an adventure you won't want to miss. Let's make this birthday trip one for the books!</p>
+
+<div class="menu">
+    <div class="menu-icon">
+        ☰
+    </div>
+    <div class="dropdown-content">
+        <a href="./resources.html">Home Page</a>
+        <a href="./flights.html">Flights</a>
+        <a href="./hurghada.html">Hurghada</a>
+        <a href="https://sanctuaryretreats.com/cruises/egypt/sanctuary-sun-boat-iv/">Nile River Cruise</a>
+        <a href="./budget.html">Budget</a>
+        <a href="./itinerary.html">Itinerary</a>
+    </div>
+</div>
+
+</body>
+
+<script>
+    document.querySelector('.menu-icon').addEventListener('click', function() {
+        var dropdown = document.querySelector('.dropdown-content');
+        if (dropdown.style.display === 'block') {
+            dropdown.style.display = 'none';
+        } else {
+            dropdown.style.display = 'block';
+        }
+    });
+</script>
+
+</html>

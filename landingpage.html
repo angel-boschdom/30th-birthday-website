@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Angel 30th Birthday</title>
+    <title>Angel 30th Birthday Trip</title>
     <link href="https://fonts.googleapis.com/css2?family=Bungee&display=swap" rel="stylesheet">
     <style>
         body {
@@ -17,6 +17,7 @@
             font-family: 'Bungee', sans-serif;
             color: rgba(139, 29, 25, 0.9);
             text-align: center;
+            position: relative;
         }
 
         .title {
@@ -52,12 +53,177 @@
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
             border-radius: 10px;
         }
+
+        #countdown {
+            display: none; /* Ensure it's hidden initially */
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -17%);
+            width: 150px;
+            height: 150px;
+            background-color: orange;
+            border-radius: 50%;
+            justify-content: center;
+            align-items: center;
+            font-size: 3em;
+            color: white;
+            z-index: 10;
+        }
     </style>
 </head>
 <body>
-    <div class="title">Nice try!!!</div>
-    <div class="subtitle">Your software skills have gotten you quite far...</div>
-    <div class="subtitle">However...</div>
-    <div class="title">You are gonna have to wait anyways, sorry!</div>
+    <div class="title">Welcome to Angel's 30th Birthday Trip</div>
+    <div class="subtitle">Spin the wheel and discover to pick the destination...</div>
+    <canvas id="wheelCanvas" width="400" height="400"></canvas>
+
+    <div class="controls">
+        <button id="spinButton">Spin the Wheel!</button>
+    </div>
+
+    <div id="countdown"></div>
+
+    <script>
+        const canvas = document.getElementById('wheelCanvas');
+        const ctx = canvas.getContext('2d');
+        const spinButton = document.getElementById('spinButton');
+        const countdownElement = document.getElementById('countdown');
+
+        let choices = ["Valencia", "Tripoli", "Valencia", "Lisbon", "Valencia", "EGYPT"];
+        let startAngle = 0;
+        let arc = Math.PI / (choices.length / 2);
+        let spinTimeout = null;
+        let spinAngleStart = 10;
+        let spinTime = 0;
+        let spinTimeTotal = 0;
+        let isSpinning = false;
+
+        function drawRouletteWheel() {
+            arc = Math.PI / (choices.length / 2);
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            const outsideRadius = 200;
+            const textRadius = 160;
+            const insideRadius = 50;
+
+            ctx.strokeStyle = "black";
+            ctx.lineWidth = 2;
+            ctx.font = 'bold 16px Arial';
+
+            for (let i = 0; i < choices.length; i++) {
+                const angle = startAngle + i * arc;
+                ctx.fillStyle = getColor(i, choices.length);
+
+                ctx.beginPath();
+                ctx.arc(canvas.width / 2, canvas.height / 2, outsideRadius, angle, angle + arc, false);
+                ctx.arc(canvas.width / 2, canvas.height / 2, insideRadius, angle + arc, angle, true);
+                ctx.stroke();
+                ctx.fill();
+
+                ctx.save();
+                ctx.fillStyle = "black";
+                ctx.translate(canvas.width / 2 + Math.cos(angle + arc / 2) * textRadius,
+                    canvas.height / 2 + Math.sin(angle + arc / 2) * textRadius);
+                ctx.rotate(angle + arc / 2 + Math.PI / 2);
+                const text = choices[i];
+                ctx.fillText(text, -ctx.measureText(text).width / 2, 0);
+                ctx.restore();
+            }
+
+            // Arrow
+            ctx.fillStyle = "black";
+            ctx.beginPath();
+            ctx.moveTo(canvas.width / 2 - 4, canvas.height / 2 - (outsideRadius + 5));
+            ctx.lineTo(canvas.width / 2 + 4, canvas.height / 2 - (outsideRadius + 5));
+            ctx.lineTo(canvas.width / 2 + 4, canvas.height / 2 - (outsideRadius - 5));
+            ctx.lineTo(canvas.width / 2 + 9, canvas.height / 2 - (outsideRadius - 5));
+            ctx.lineTo(canvas.width / 2 + 0, canvas.height / 2 - (outsideRadius - 13));
+            ctx.lineTo(canvas.width / 2 - 9, canvas.height / 2 - (outsideRadius - 5));
+            ctx.lineTo(canvas.width / 2 - 4, canvas.height / 2 - (outsideRadius - 5));
+            ctx.lineTo(canvas.width / 2 - 4, canvas.height / 2 - (outsideRadius + 5));
+            ctx.fill();
+        }
+
+        function getColor(item, maxItem) {
+            const colors = ["yellow", "#79e986", "yellow", "#f393c8f2", "yellow", "orange"];
+            return colors[item % colors.length];
+        }
+
+        function rotateWheel() {
+            spinTime += 30;
+            if (spinTime >= spinTimeTotal) {
+                stopRotateWheel();
+                return;
+            }
+            const spinAngle = spinAngleStart - easeOut(spinTime, 0, spinAngleStart, spinTimeTotal);
+            startAngle += (spinAngle * Math.PI / 180);
+            drawRouletteWheel();
+            spinTimeout = setTimeout(rotateWheel, 30);
+        }
+
+        function stopRotateWheel() {
+            clearTimeout(spinTimeout);
+            isSpinning = false;
+
+            const degrees = startAngle * 180 / Math.PI + 90;
+            const arcd = arc * 180 / Math.PI;
+            let index = Math.floor((360 - degrees % 360) / arcd);
+
+            if (index >= choices.length) {
+                index = index % choices.length;
+            }
+
+            ctx.save();
+            ctx.font = 'bold 30px Arial';
+            const text = choices[index];
+            ctx.fillText(text, canvas.width / 2 - ctx.measureText(text).width / 2, canvas.height / 2 + 10);
+            ctx.restore();
+
+            // Introduce a 0.7-second pause before starting the countdown
+            setTimeout(startCountdown, 700);
+        }
+
+        function easeOut(t, b, c, d) {
+            const ts = (t /= d) * t;
+            const tc = ts * t;
+            return b + c * (tc + -3 * ts + 3 * t);
+        }
+
+        function startCountdown() {
+            let countdown = 3;
+            countdownElement.style.display = 'flex'; // Show the countdown
+            countdownElement.textContent = `${countdown}!`;
+
+            const interval = setInterval(() => {
+                countdown -= 1;
+                if (countdown > 0) {
+                    countdownElement.textContent = `${countdown}!`;
+                } else {
+                    clearInterval(interval);
+                    window.location.href = 'itinerary.html';
+                }
+            }, 1000);
+        }
+
+        function startWheelRotation() {
+            if (isSpinning) return;
+
+            spinAngleStart = 0.5 * 10 + 10;
+            spinTime = 0;
+            spinTimeTotal = 0.5 * 3000 + 4000;
+
+            isSpinning = true;
+            rotateWheel();
+        }
+
+        spinButton.addEventListener('click', () => {
+            startWheelRotation();
+        });
+
+        canvas.addEventListener('click', () => {
+            startWheelRotation();
+        });
+
+        drawRouletteWheel();
+    </script>
 </body>
 </html>

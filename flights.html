@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>Angel 30th Birthday Trip - Flights</title>
+    <link href="https://fonts.googleapis.com/css2?family=Bungee&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background-color: #fb9c58;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start; /* Ensure content flows naturally */
+            align-items: center;
+            margin: 0;
+            font-family: 'Bungee', sans-serif;
+            color: rgba(139, 29, 25, 0.9);
+            text-align: center;
+            position: relative;
+            padding: 20px;
+        }
+
+        /* Menu styles */
+        .menu {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-size: 30px;
+            cursor: pointer;
+            z-index: 10;
+        }
+
+        .menu-icon {
+            width: 50px;
+            height: 50px;
+            background-color: #8B0000;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 30px;
+            cursor: pointer;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            right: 0;
+            top: 60px;
+            background-color: #f9f9f9;
+            min-width: 300px;
+            box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+            z-index: 1;
+        }
+
+        .dropdown-content a {
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+        }
+
+        .dropdown-content a:hover {
+            background-color: #f1f1f1;
+        }
+
+        /* Table styles */
+        table {
+            border-collapse: collapse;
+            margin: 20px 0;
+            font-size: 18px;
+            width: 100%; /* Ensure the table takes the full width */
+            max-width: 800px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            overflow-x: auto; /* Allow horizontal scrolling if needed */
+            display: block; /* Ensure it behaves as a block-level element */
+        }
+
+        th, td {
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            text-align: center;
+        }
+
+        th {
+            background-color: #8B0000;
+            color: white;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        tr:nth-child(odd) {
+            background-color: #f2f2f2ac;
+        }
+
+        tr:hover {
+            background-color: #ddd;
+        }
+
+        /* Additional mobile-specific adjustments */
+        @media (max-width: 600px) {
+            h1, p {
+                font-size: 24px; /* Adjust font size for small screens */
+            }
+
+            h2, h3 {
+                font-size: 20px;
+            }
+
+            th, td {
+                font-size: 16px;
+                padding: 8px 10px;
+            }
+
+            .menu {
+                top: 10px;
+                right: 10px;
+            }
+        }
+
+    </style>
+</head>
+<body>
+
+<h1>Flight Information</h1>
+<h2>International Flights</h2>
+<h3>From Cambridge</h3>
+<table>
+    <thead>
+        <tr>
+            <th>Origin</th>
+            <th>Destination</th>
+            <th>Departs</th>
+            <th>Price</th>
+            <th>Airline</th>
+            <th>Link</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>London Gatwick</td>
+            <td>Hurghada</td>
+            <td>Fri 28th March 14:05</td>
+            <td>59 EUR</td>
+            <td>Wizz Air</td>
+            <td><a href="https://www.google.com/travel/flights/search?tfs=CBwQAhopEgoyMDI1LTAzLTI4agwIAxIIL20vMDRqcGxyDQgDEgkvbS8wMnhiempAAUgBcAGCAQsI____________AZgBAg">Link</a></td>
+        </tr>
+        <tr>
+            <td>Cairo</td>
+            <td>London Heathrow</td>         
+            <td>Sun 6th April 07:00</td>
+            <td>139 EUR</td>
+            <td>British Airways</td>
+            <td><a href="https://www.google.com/travel/flights/search?tfs=CBwQAhoqEgoyMDI1LTA0LTA2KABqDAgDEggvbS8wMXcydnIMCAMSCC9tLzA0anBsQAFIAXABggELCP___________wGYAQI">Link</a></td>
+        </tr>
+    </tbody>
+</table>
+<h3>From Zurich</h3>
+<table>
+    <thead>
+        <tr>
+            <th>Origin</th>
+            <th>Destination</th>
+            <th>Departs</th>
+            <th>Price</th>
+            <th>Airline</th>
+            <th>Link</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>Zurich</td>
+            <td>Hurghada</td>
+            <td>Fri 28th Match 06:30</td>
+            <td>179 EUR</td>
+            <td>Chair Airlines</td>
+            <td><a href="https://www.google.com/travel/flights/search?tfs=CBwQAhorEgoyMDI1LTAzLTI4KABqDAgDEggvbS8wODk2NnINCAMSCS9tLzAyeGJ6akABSAFwAYIBCwj___________8BmAEC">Link</a></td>
+        </tr>
+        <tr>
+            <td>Cairo</td>
+            <td>Zurich</td>         
+            <td>Sun 6th April 03:00</td>
+            <td>154 EUR</td>
+            <td>Aegean</td>
+            <td><a href="https://www.google.com/travel/flights/search?tfs=CBwQAhooEgoyMDI1LTA0LTA1agwIAxIIL20vMDF3MnZyDAgDEggvbS8wODk2NkABSAFwAYIBCwj___________8BmAEC">Link</a></td>
+        </tr>
+    </tbody>
+</table>
+<h2>Domestic Flights</h2>
+<table>
+    <thead>
+        <tr>
+            <th>Origin</th>
+            <th>Destination</th>
+            <th>Departs</th>
+            <th>Price</th>
+            <th>Airline</th>
+            <th>Link</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>Aswan</td>
+            <td>Cairo</td>
+            <td>Fri 4th April 08:00</td>
+            <td>115 EUR</td>
+            <td>Egyptair</td>
+            <td><a href="https://www.google.com/travel/flights/search?tfs=CBwQAhojEgoyMDI1LTA0LTA0agcIARIDQVNXcgwIAxIIL20vMDF3MnZAAUgBcAGCAQsI____________AZgBAg">Link</a></td>
+        </tr>
+    </tbody>
+</table>
+
+<div class="menu">
+    <div class="menu-icon">
+        ☰
+    </div>
+    <div class="dropdown-content">
+        <a href="./resources.html">Home Page</a>
+        <a href="./flights.html">Flights</a>
+        <a href="./hurghada.html">Hurghada</a>
+        <a href="https://sanctuaryretreats.com/cruises/egypt/sanctuary-sun-boat-iv/">Nile River Cruise</a>
+        <a href="./budget.html">Budget</a>
+        <a href="./itinerary.html">Itinerary</a>
+    </div>
+</div>
+
+<script>
+    document.querySelector('.menu-icon').addEventListener('click', function() {
+        var dropdown = document.querySelector('.dropdown-content');
+        if (dropdown.style.display === 'block') {
+            dropdown.style.display = 'none';
+        } else {
+            dropdown.style.display = 'block';
+        }
+    });
+</script>
+
+</body>
+</html>

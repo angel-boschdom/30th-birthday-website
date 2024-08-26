@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Angel 30th Birthday Trip - Itinerary</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Bungee&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background-color: #fb9c58;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: 'Bungee', sans-serif;
+            color: rgba(139, 29, 25, 0.9);
+            text-align: center;
+            position: relative;
+        }
+
+        .title {
+            font-size: 2em;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            font-size: 1.2em;
+            margin-bottom: 20px;
+        }
+
+        #nextLocationButton {
+            background-color: #8b1d19;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            font-size: 1.2em;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+            margin-top: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            position: relative;
+        }
+
+        #date {
+            padding: 15px 30px;
+            font-size: 1.5em;
+            margin-top: 5px;
+        }
+
+        #nextLocationButton:hover {
+            background-color: #6f1614;
+            transform: translateY(-3px);
+        }
+
+        #map {
+            height: 300px;
+            width: 90%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .activities {
+            display: none;
+            text-align: left;
+            margin: 0 auto;
+            width: fit-content;
+        }
+
+        .activities ul {
+            padding-left: 0;
+            list-style-position: inside;
+                    }
+    </style>
+</head>
+<body>
+
+<h1>Itinerary</h1>
+<p>Explore the trip, step by step</p>
+<div id="date">28th March</div>
+<div id="map"></div>
+<button id="nextLocationButton" onclick="flyToNextLocation()">Next: Hurghada</button>
+<div id="hurghada-activities" class="activities">
+    <ul>
+        <li>Scuba <a href=https://dive-hurghada.com>diving</a> / <a href=https://dailytravelpill.com/hurghada-snorkeling-best-places>Snorkeling</a> 🐠</li>
+        <li><a href=https://www.tripadvisor.com/AttractionProductReview-g297549-d16912582-Super_Safari_ATV_Drive_Buggy_Car_Camel_Ride_Bedouin_Dinner_Show_Hurghada-Hurghada_.html>Desert Safari</a> & Bedouin experience 🐪</li>
+        <li><a href=https://hurghada.com/night-life>Party</a> and clubbing 🎉</li> 
+    </ul>
+</div>
+<div id="luxor-activities" class="activities">
+    <ul>
+        <li>Ancient Egyptian temples 🏛️</li>
+        <li>Hot air balloon sunrise 🎈</li>
+        <li>5-star cruise in the Nile River 🚢</li>
+    </ul>
+</div>
+<div id="kawmombo-activities" class="activities">
+    <ul>
+        <li>Party in the 5-star cruise 🎉</li>
+        <li>Ancient Egyptian temples 🏛️</li>
+    </ul>
+</div>
+<div id="aswan-activities" class="activities">
+    <ul>
+        <li>Enjoy the cruise in the Nile River 🚢</li>
+        <li>Rest before flight to Cairo ✈️</li>
+    </ul>
+</div>
+<div id="cairo-activities" class="activities">
+    <ul>
+        <li>Great Pyramids of Ghiza 🐪</li>
+        <li>Archeology 🏺</li>
+        <li>Whatever you want! 💪</li>
+    </ul>
+</div>
+
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+<script>
+    // Initialize the map centered at Cambridge
+    const map = L.map('map').setView([52.2053, 0.1218], 11);
+
+    // Load and display tile layer from openstreetmap.de
+    L.tileLayer('https://{s}.tile.openstreetmap.de/tiles/osmde/{z}/{x}/{y}.png', {
+        maxZoom: 19,
+        attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+    }).addTo(map);
+
+    // Itinerary locations with names
+    const itinerary = [
+        { name: "Hurghada", date: "29/03", lat: 27.2579, lng: 33.8116, zoom: 10 },
+        { name: "Luxor", date: "01/04", lat: 25.6872, lng: 32.6396, zoom: 10 },
+        { name: "Kawm Ombo", date: "02/04", lat: 24.4764, lng: 32.9463, zoom: 10 },
+        { name: "Aswan", date: "03/04", lat: 24.0889, lng: 32.8998, zoom: 10 },
+        { name: "Cairo", date: "04/04", lat: 30.0444, lng: 31.2357, zoom: 7.5 },
+        { name: "Cambridge", date: "06/04", lat: 52.2053, lng: 0.1218, zoom: 11 }
+    ];
+
+    let currentIndex = 0;
+
+    // Function to animate the transition to the next location
+    function flyToNextLocation() {
+        if (currentIndex < itinerary.length) {
+            const { name, lat, lng, zoom } = itinerary[currentIndex];
+            map.flyTo([lat, lng], zoom, {
+                animate: true,
+                duration: 2.5
+            });
+
+            // Hide all activities
+            document.querySelectorAll('.activities').forEach(activity => {
+                activity.style.display = 'none';
+            });
+
+            // Show the current location's activities
+            const activitiesId = `${name.toLowerCase().replace(" ", "")}-activities`;
+            const currentActivities = document.getElementById(activitiesId);
+            if (currentActivities) {
+                currentActivities.style.display = 'block';
+            }
+
+            // Update "date"
+            const { date: date } = itinerary[currentIndex];
+            formattedDate = formatDate(date);
+            document.getElementById('date').innerText = formattedDate;
+
+            // Check for the next location
+            if (currentIndex + 1 < itinerary.length) {
+                const { name: nameNext } = itinerary[currentIndex + 1];
+                if (nameNext === "Cambridge") {
+                    // end of itinerary
+                    document.getElementById('nextLocationButton').innerText = `Learn more about this trip`;
+                } else {
+                    document.getElementById('nextLocationButton').innerText = `Next: ${nameNext}`;
+                }
+            } else {
+                //document.getElementById('nextLocationButton').innerText = 'Restart Itinerary';
+                window.location.href = 'resources.html'; // redirect to next page
+            }
+
+            currentIndex++;
+        } else {
+            currentIndex = 0; // Reset to the start of the itinerary
+            flyToNextLocation();
+        }
+    }
+
+    function formatDate(dateString) {
+            // Converts date formats i.e. "28/03" into "28th March" 
+
+            // Split the date string into day and month parts
+            const [day, month] = dateString.split('/');
+
+            // Create an array of month names
+            const monthNames = [
+                "January", "February", "March", "April", "May", "June",
+                "July", "August", "September", "October", "November", "December"
+            ];
+
+            // Function to get the ordinal suffix for a day
+            function getOrdinalSuffix(day) {
+                const j = day % 10, k = day % 100;
+                if (j == 1 && k != 11) {
+                    return "st";
+                }
+                if (j == 2 && k != 12) {
+                    return "nd";
+                }
+                if (j == 3 && k != 13) {
+                    return "rd";
+                }
+                return "th";
+            }
+
+            // Format the date
+            return `${parseInt(day)}${getOrdinalSuffix(parseInt(day))} ${monthNames[parseInt(month) - 1]}`;
+        }
+
+    // Initialize visibility on page load
+    document.addEventListener('DOMContentLoaded', () => {
+        // Set the map to Cambridge on load
+        const { name, lat, lng, zoom } = itinerary[itinerary.length - 1];
+        map.setView([lat, lng], zoom);
+
+        // Show Cambridge activities
+        const activitiesId = `${name.toLowerCase().replace(" ", "")}-activities`;
+        const currentActivities = document.getElementById(activitiesId);
+        if (currentActivities) {
+            currentActivities.style.display = 'block';
+        }
+
+        // Set the button text to the next location
+        if (currentIndex < itinerary.length) {
+            const { name: nameNext } = itinerary[currentIndex];
+            if (nameNext === "Cambridge") {
+                // end of itinerary
+                document.getElementById('nextLocationButton').innerText = `Learn more about this trip`;
+            } else {
+                document.getElementById('nextLocationButton').innerText = `Next: ${nameNext}`;
+            }
+        }
+    });
+</script>
+
+</body>
+</html>
